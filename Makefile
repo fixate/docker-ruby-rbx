@@ -4,4 +4,4 @@ build:
 	docker build -t fixate/ruby-rbx .
 
 push:
-	docker build -t fixate/ruby-rbx
+	docker push fixate/ruby-rbx
