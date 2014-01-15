@@ -1,13 +1,13 @@
-FROM ubuntu:12.04
+FROM fixate/ruby-mri
 MAINTAINER Stan Bondi <stan@fixate.it>
 
+# Install dependencies
 ADD install_deps.sh /opt/fixate/install_deps
-RUN chmod +x /opt/fixate/install_deps
 RUN /opt/fixate/install_deps
 
-ENV PATH ~/.rbenv/shims:~/.rbenv/bin:$PATH
-RUN echo 'eval "$(rbenv init -)"' >  ~/.bash_profile
+# Install rubinius
+ADD install_rubinius.sh /opt/fixate/install_rubinius
+RUN PREFIX=/usr/local/rubinius TAG=2.2.3 /opt/fixate/install_rubinius
 
-ADD rubies /
-RUN find /rubies -type f -exec chmod +x '{}' \;
-RUN /rubies/rbx-2.2.1
+ENV PATH /usr/local/rubinius/bin:$PATH
+
