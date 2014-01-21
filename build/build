@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export PATH=/usr/local/ruby/bin:$PATH
 gem update --system

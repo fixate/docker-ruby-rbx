@@ -1,13 +1,12 @@
-FROM fixate/ruby-mri
+FROM fixate/ruby-mri:12.04
 MAINTAINER Stan Bondi <stan@fixate.it>
 
 # Install dependencies
-ADD install_deps.sh /opt/fixate/install_deps
-RUN /opt/fixate/install_deps
+ADD ./build/ /build/rbx/
+RUN /build/rbx/prepare
 
 # Install rubinius
-ADD install_rubinius.sh /opt/fixate/install_rubinius
-RUN PREFIX=/usr/local/rubinius TAG=2.2.3 /opt/fixate/install_rubinius
+RUN PREFIX=/usr/local/rubinius TAG=2.2.3 /build/rbx/build
 
 ENV PATH /usr/local/rubinius/bin:$PATH
 
